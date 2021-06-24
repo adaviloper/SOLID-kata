@@ -27,6 +27,7 @@
         }
     ],
     "require": {
-        "illuminate/collections": "^8.48"
+        "illuminate/collections": "^8.48",
+        "psy/psysh": "^0.10.8"
     }
 }
