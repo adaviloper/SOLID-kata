@@ -12,6 +12,9 @@
         }
     },
     "autoload-dev": {
+        "classmap": [
+            "tests"
+        ],
         "psr-4": {
             "Tests\\": "tests/"
         }
@@ -22,5 +25,8 @@
             "name": "Richard Ting",
             "email": "richard.tin@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "illuminate/collections": "^8.48"
+    }
 }
