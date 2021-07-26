@@ -2,8 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\StandardCard;
-use App\StandardDeck;
+use App\Standard\StandardCard;
 use Tests\TestCase;
 
 class StandardCardTest extends TestCase
@@ -16,7 +15,7 @@ class StandardCardTest extends TestCase
             'suit' => 'some-suit',
         ]);
 
-        self::assertEquals('some-value', $card->value);
-        self::assertEquals('some-suit', $card->suit);
+        self::assertEquals('some-value', $card->value());
+        self::assertEquals('some-suit', $card->suit());
     }
 }

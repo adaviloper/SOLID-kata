@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\StandardCard;
-use App\StandardDeck;
+use App\Standard\StandardCard;
+use App\Standard\StandardCardAttributes;
+use App\Standard\StandardDeck;
 use App\Generators\StandardDeckGenerator;
 use Tests\TestCase;
 
@@ -14,11 +15,17 @@ class StandardDeckTest extends TestCase
      */
     protected $generator;
 
+    /**
+     * @var StandardCardAttributes
+     */
+    protected $attributes;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->generator = new StandardDeckGenerator();
+        $this->attributes = new StandardCardAttributes();
     }
 
     /** @test */
@@ -27,7 +34,7 @@ class StandardDeckTest extends TestCase
         $deck = $this->generator->generate();
 
         self::assertObjectHasAttribute('cards', $deck);
-        self::assertIsIterable($deck->cards);
+        self::assertIsIterable($deck->cards());
         self::assertInstanceOf(StandardDeck::class, $deck);
     }
 
@@ -36,7 +43,7 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        self::assertCount(54, $deck->cards);
+        self::assertCount(54, $deck->cards());
     }
 
     /** @test */
@@ -44,7 +51,7 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        self::assertInstanceOf(StandardCard::class, $deck->cards->first());
+        self::assertInstanceOf(StandardCard::class, $deck->cards()->first());
     }
 
     /** @test */
@@ -52,8 +59,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $hearts = $deck->cards->filter(static function ($card) {
-            return $card->suit === StandardDeckGenerator::HEARTS;
+        $hearts = $deck->cards()->filter(function ($card) {
+            return $card->suit() === $this->attributes::HEARTS;
         });
 
         self::assertCount(13, $hearts);
@@ -64,8 +71,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $clubs = $deck->cards->filter(static function ($card) {
-            return $card->suit === StandardDeckGenerator::CLUBS;
+        $clubs = $deck->cards()->filter(function ($card) {
+            return $card->suit() === $this->attributes::CLUBS;
         });
 
         self::assertCount(13, $clubs);
@@ -76,8 +83,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $spades = $deck->cards->filter(static function ($card) {
-            return $card->suit === StandardDeckGenerator::SPADES;
+        $spades = $deck->cards()->filter(function ($card) {
+            return $card->suit() === $this->attributes::SPADES;
         });
 
         self::assertCount(13, $spades);
@@ -88,8 +95,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $diamonds = $deck->cards->filter(static function ($card) {
-            return $card->suit === StandardDeckGenerator::DIAMONDS;
+        $diamonds = $deck->cards()->filter(function ($card) {
+            return $card->suit() === $this->attributes::DIAMONDS;
         });
 
         self::assertCount(13, $diamonds);
@@ -100,8 +107,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $diamonds = $deck->cards->filter(static function ($card) {
-            return $card->suit === StandardDeckGenerator::JOKER;
+        $diamonds = $deck->cards()->filter(function ($card) {
+            return $card->suit() === $this->attributes::JOKER;
         });
 
         self::assertCount(2, $diamonds);
@@ -112,8 +119,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $aces = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $aces = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $aces);
@@ -124,8 +131,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $twos = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $twos = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $twos);
@@ -136,8 +143,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $threes = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $threes = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $threes);
@@ -148,8 +155,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $fours = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $fours = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $fours);
@@ -160,8 +167,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $fives = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $fives = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $fives);
@@ -172,8 +179,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $sixes = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $sixes = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $sixes);
@@ -184,8 +191,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $sevens = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $sevens = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $sevens);
@@ -196,8 +203,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $eights = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $eights = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $eights);
@@ -208,8 +215,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $nines = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $nines = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $nines);
@@ -220,8 +227,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $tens = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $tens = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $tens);
@@ -232,8 +239,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $jacks = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $jacks = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $jacks);
@@ -244,8 +251,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $queens = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $queens = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $queens);
@@ -256,8 +263,8 @@ class StandardDeckTest extends TestCase
     {
         $deck = $this->generator->generate();
 
-        $kings = $deck->cards->filter(static function ($card) {
-            return $card->value === StandardDeckGenerator::ACE;
+        $kings = $deck->cards()->filter(function ($card) {
+            return $card->value() === $this->attributes::ACE;
         });
 
         self::assertCount(4, $kings);

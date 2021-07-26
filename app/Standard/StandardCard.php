@@ -1,14 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Standard;
 
 class StandardCard
 {
     /** @var string */
-    public $value;
+    private $value;
 
     /** @var string */
-    public $suit;
+    private $suit;
 
     private function __construct($array)
     {
@@ -19,5 +19,15 @@ class StandardCard
     public static function make(array $array = []): self
     {
         return new static($array);
+    }
+
+    public function value()
+    {
+        return $this->value;
+    }
+
+    public function suit()
+    {
+        return $this->suit;
     }
 }
