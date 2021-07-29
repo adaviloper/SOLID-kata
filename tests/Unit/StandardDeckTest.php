@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Standard\StandardCard;
-use App\Standard\StandardCardAttributes;
+use App\Standard\StandardStandardCardAttributes;
 use App\Standard\StandardDeck;
 use App\Generators\StandardDeckGenerator;
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class StandardDeckTest extends TestCase
     protected $generator;
 
     /**
-     * @var StandardCardAttributes
+     * @var StandardStandardCardAttributes
      */
     protected $attributes;
 
@@ -25,7 +25,7 @@ class StandardDeckTest extends TestCase
         parent::setUp();
 
         $this->generator = new StandardDeckGenerator();
-        $this->attributes = new StandardCardAttributes();
+        $this->attributes = new StandardStandardCardAttributes();
     }
 
     /** @test */

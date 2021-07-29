@@ -2,7 +2,9 @@
 
 namespace App\Standard;
 
-class StandardCardAttributes
+use App\Interfaces\StandardCardAttributesContract;
+
+class StandardStandardCardAttributes implements StandardCardAttributesContract
 {
     public const HEARTS = [
         'label' => 'hearts',

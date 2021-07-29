@@ -2,18 +2,19 @@
 
 namespace App\Generators;
 
+use App\Interfaces\StandardCardAttributesContract;
 use App\Interfaces\DeckGenerator;
 use App\Standard\StandardCard;
-use App\Standard\StandardCardAttributes;
+use App\Standard\StandardStandardCardAttributes;
 use App\Standard\StandardDeck;
 
 class StandardDeckGenerator implements DeckGenerator
 {
     private $attributes;
 
-    public function __construct()
+    public function __construct(StandardCardAttributesContract $cardAttributes)
     {
-        $this->attributes = new StandardCardAttributes();
+        $this->attributes = $cardAttributes;
     }
 
     public function generate(): StandardDeck
@@ -21,10 +22,11 @@ class StandardDeckGenerator implements DeckGenerator
         $cards = collect();
         foreach ($this->attributes->suits() as $suit) {
             foreach($this->attributes->values() as $value) {
-                $cards->push(StandardCard::make([
-                    'value' => $value,
-                    'suit' => $suit,
-                ]));
+                $cards->push(CardFactory::build($suit, $value));
+                // $cards->push(StandardCard::make([
+                //     'value' => $value,
+                //     'suit' => $suit,
+                // ]));
             }
         }
 
