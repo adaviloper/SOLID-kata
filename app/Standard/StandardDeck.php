@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class StandardDeck implements Deck
 {
-    /** @var Collection|StandardDeck[] $cards */
+    /** @var Collection|StandardCard[] $cards */
     private $cards;
 
     private function __construct(Collection $cards)
@@ -15,7 +15,7 @@ class StandardDeck implements Deck
         $this->cards = $cards;
     }
 
-    public static function make($cards): StandardDeck
+    public static function make(Collection $cards): StandardDeck
     {
         return new static($cards);
     }

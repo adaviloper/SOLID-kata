@@ -4,10 +4,12 @@ namespace App\Generators;
 
 use App\Interfaces\StandardCardAttributesContract;
 use App\Interfaces\DeckGenerator;
+use App\Standard\Glyphs\NullGlyph;
 use App\Standard\StandardCard;
 use App\Standard\StandardStandardCardAttributes;
 use App\Standard\StandardDeck;
 use App\Standard\Suits\Joker;
+use App\Standard\SuitedCard;
 
 class StandardDeckGenerator implements DeckGenerator
 {
@@ -27,7 +29,8 @@ class StandardDeckGenerator implements DeckGenerator
             });
         })->flatten();
 
-        $cards->push(StandardCard::make(new Joker()))->push(StandardCard::make(new Joker()));
+        $cards->push(StandardCard::make(new Joker(), new NullGlyph()))
+            ->push(StandardCard::make(new Joker(), new NullGlyph()));
 
         return StandardDeck::make($cards);
     }
