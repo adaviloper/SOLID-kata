@@ -3,71 +3,53 @@
 namespace App\Standard;
 
 use App\Interfaces\StandardCardAttributesContract;
+use App\Standard\Glyphs\Ace;
+use App\Standard\Glyphs\Eight;
+use App\Standard\Glyphs\Five;
+use App\Standard\Glyphs\Four;
+use App\Standard\Glyphs\Jack;
+use App\Standard\Glyphs\King;
+use App\Standard\Glyphs\Nine;
+use App\Standard\Glyphs\Queen;
+use App\Standard\Glyphs\Seven;
+use App\Standard\Glyphs\Six;
+use App\Standard\Glyphs\Ten;
+use App\Standard\Glyphs\Three;
+use App\Standard\Glyphs\Two;
+use App\Standard\Suits\Club;
+use App\Standard\Suits\Diamond;
+use App\Standard\Suits\Heart;
+use App\Standard\Suits\Spade;
+use Illuminate\Support\Collection;
 
 class StandardStandardCardAttributes implements StandardCardAttributesContract
 {
-    public const HEARTS = [
-        'label' => 'hearts',
-        'color' => 'red',
-    ];
-    public const SPADES = [
-        'label' => 'spades',
-        'color' => 'red',
-    ];
-    public const CLUBS = [
-        'label' => 'clubs',
-        'color' => 'red',
-    ];
-    public const DIAMONDS = [
-        'label' => 'diamonds',
-        'color' => 'red',
-    ];
-    public const JOKER = [
-        'label' => 'joker',
-        'color' => 'black',
-    ];
-    public const SUITS = [
-        self::HEARTS,
-        self::SPADES,
-        self::CLUBS,
-        self::DIAMONDS,
-    ];
-
-    public const ACE = 1;
-    public const TWOS = 2;
-    public const THREES = 3;
-    public const FOURS = 4;
-    public const FIVES = 5;
-    public const SIXES = 6;
-    public const SEVENS = 7;
-    public const EIGHTS = 8;
-    public const NINES = 9;
-    public const TENS = 10;
-    public const JACKS = 11;
-    public const QUEENS = 12;
-    public const KINGS = 13;
-
-    public function values()
+    public function glyphs(): Collection
     {
-        return [
-            self::ACE,
-            self::TWOS,
-            self::THREES,
-            self::FOURS,
-            self::FIVES,
-            self::SIXES,
-            self::SEVENS,
-            self::EIGHTS,
-            self::NINES,
-            self::TENS,
-            self::JACKS,
-            self::QUEENS,
-            self::KINGS,
-        ];
+        return collect([
+            new Ace(),
+            new Two(),
+            new Three(),
+            new Four(),
+            new Five(),
+            new Six(),
+            new Seven(),
+            new Eight(),
+            new Nine(),
+            new Ten(),
+            new Jack(),
+            new Queen(),
+            new King(),
+        ]);
     }
 
-    public function suits()
+    public function suits(): Collection
     {
-        return self::SUITS;
+        return collect([
+            new Heart(),
+            new Spade(),
+            new Club(),
+            new Diamond(),
+        ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Interfaces\DeckGenerator;
 use App\Standard\StandardCard;
 use App\Standard\StandardStandardCardAttributes;
 use App\Standard\StandardDeck;
+use App\Standard\Suits\Joker;
 
 class StandardDeckGenerator implements DeckGenerator
 {
@@ -19,24 +20,14 @@ class StandardDeckGenerator implements DeckGenerator
 
     public function generate(): StandardDeck
     {
-        $cards = collect();
-        foreach ($this->attributes->suits() as $suit) {
-            foreach($this->attributes->values() as $value) {
-                $cards->push(CardFactory::build($suit, $value));
-                // $cards->push(StandardCard::make([
-                //     'value' => $value,
-                //     'suit' => $suit,
-                // ]));
-            }
-        }
+        $cards = $this->attributes->suits()->map(function ($suit) {
+            return $this->attributes->glyphs()->map(function ($glyph) use ($suit) {
+                // $cards->push(CardFactory::build($suit, $value));
+                return StandardCard::make($suit, $glyph);
+            });
+        })->flatten();
 
-        $cards->push(StandardCard::make([
-            'value' => -1,
-            'suit' => $this->attributes::JOKER,
-        ]))->push(StandardCard::make([
-            'value' => -1,
-            'suit' => $this->attributes::JOKER,
-        ]));
+        $cards->push(StandardCard::make(new Joker()))->push(StandardCard::make(new Joker()));
 
         return StandardDeck::make($cards);
     }

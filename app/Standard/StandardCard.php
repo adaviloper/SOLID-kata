@@ -2,28 +2,31 @@
 
 namespace App\Standard;
 
+use App\Standard\Glyphs\GlyphContract;
+use App\Standard\Suits\Suit;
+
 class StandardCard
 {
     /** @var string */
-    private $value;
+    private $glyph;
 
     /** @var string */
     private $suit;
 
-    private function __construct($array)
+    private function __construct(Suit $suit, ?GlyphContract $glyph = null)
     {
-        $this->value = $array['value'];
-        $this->suit = $array['suit'];
+        $this->suit = $suit;
+        $this->glyph = $glyph;
     }
 
-    public static function make(array $array = []): self
+    public static function make(Suit $suit, ?GlyphContract $glyph = null): self
     {
-        return new static($array);
+        return new static($suit, $glyph);
     }
 
-    public function value()
+    public function glyph()
     {
-        return $this->value;
+        return $this->glyph;
     }
 
     public function suit()
