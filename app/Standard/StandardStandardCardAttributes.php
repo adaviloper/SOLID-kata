@@ -20,10 +20,19 @@ use App\Standard\Suits\Club;
 use App\Standard\Suits\Diamond;
 use App\Standard\Suits\Heart;
 use App\Standard\Suits\Spade;
+use App\Theme;
 use Illuminate\Support\Collection;
 
 class StandardStandardCardAttributes implements StandardCardAttributesContract
 {
+    /** @var Theme */
+    protected $theme;
+
+    public function __construct(Theme $theme)
+    {
+        $this->theme = $theme;
+    }
+
     public function glyphs(): Collection
     {
         return collect([
@@ -46,10 +55,10 @@ class StandardStandardCardAttributes implements StandardCardAttributesContract
     public function suits(): Collection
     {
         return collect([
-            new Heart(),
-            new Spade(),
-            new Club(),
-            new Diamond(),
+            new Spade($this->theme->primary()),
+            new Heart($this->theme->secondary()),
+            new Club($this->theme->primary()),
+            new Diamond($this->theme->secondary()),
         ]);
     }
 }

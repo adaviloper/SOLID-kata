@@ -4,8 +4,6 @@ namespace App\Standard;
 
 use App\Card;
 use App\Standard\Glyphs\GlyphContract;
-use App\Standard\Glyphs\NullGlyph;
-use App\Standard\Suits\NullSuit;
 use App\Standard\Suits\Suit;
 
 class StandardCard extends Card
@@ -16,7 +14,7 @@ class StandardCard extends Card
     /** @var Suit */
     private $suit;
 
-    private $isFlipped = true;
+    private $isFaceDown = true;
 
     private function __construct(Suit $suit, GlyphContract $glyph)
     {
@@ -29,24 +27,24 @@ class StandardCard extends Card
         return new static($suit, $glyph);
     }
 
-    public function glyph(): GlyphContract
+    public function glyph(): ?GlyphContract
     {
-        if ($this->isFlipped) {
-            return new NullGlyph();
+        if ($this->isFaceDown) {
+            return null;
         }
         return $this->glyph;
     }
 
-    public function suit(): Suit
+    public function suit(): ?Suit
     {
-        if ($this->isFlipped) {
-            return new NullSuit();
+        if ($this->isFaceDown) {
+            return null;
         }
         return $this->suit;
     }
 
     public function flip(): void
     {
-        $this->isFlipped = !$this->isFlipped;
+        $this->isFaceDown = !$this->isFaceDown;
     }
 }

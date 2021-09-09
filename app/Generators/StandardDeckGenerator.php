@@ -2,14 +2,13 @@
 
 namespace App\Generators;
 
-use App\Interfaces\StandardCardAttributesContract;
 use App\Interfaces\DeckGenerator;
+use App\Interfaces\StandardCardAttributesContract;
 use App\Standard\Glyphs\NullGlyph;
 use App\Standard\StandardCard;
-use App\Standard\StandardStandardCardAttributes;
 use App\Standard\StandardDeck;
+use App\Standard\Suits\Colors\NullColor;
 use App\Standard\Suits\Joker;
-use App\Standard\SuitedCard;
 
 class StandardDeckGenerator implements DeckGenerator
 {
@@ -28,8 +27,8 @@ class StandardDeckGenerator implements DeckGenerator
             });
         })->flatten();
 
-        $cards->push(StandardCard::make(new Joker(), new NullGlyph()))
-            ->push(StandardCard::make(new Joker(), new NullGlyph()));
+        $cards->push(StandardCard::make(new Joker(new NullColor()), new NullGlyph()))
+            ->push(StandardCard::make(new Joker(new NullColor()), new NullGlyph()));
 
         return StandardDeck::make($cards);
     }
