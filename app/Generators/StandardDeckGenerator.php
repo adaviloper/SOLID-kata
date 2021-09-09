@@ -24,7 +24,6 @@ class StandardDeckGenerator implements DeckGenerator
     {
         $cards = $this->attributes->suits()->map(function ($suit) {
             return $this->attributes->glyphs()->map(function ($glyph) use ($suit) {
-                // $cards->push(CardFactory::build($suit, $value));
                 return StandardCard::make($suit, $glyph);
             });
         })->flatten();
