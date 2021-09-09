@@ -2,7 +2,12 @@
 
 namespace App\Standard\Suits;
 
+use App\Standard\Suits\Colors\Red;
+
 class Diamond extends Suit
 {
-    protected $color = 'red';
+    public function __construct()
+    {
+        $this->color = new Red();
+    }
 }

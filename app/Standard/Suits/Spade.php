@@ -2,7 +2,12 @@
 
 namespace App\Standard\Suits;
 
+use App\Standard\Suits\Colors\Black;
+
 class Spade extends Suit
 {
-    protected $color = 'black';
+    public function __construct()
+    {
+        $this->color = new Black();
+    }
 }
